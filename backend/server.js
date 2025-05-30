@@ -59,7 +59,8 @@ ${userQuestion}
 });
 
 // ✅ Serve index.html for all routes
-app.get("*", (req, res) => {
+// Fallback for any non-API route
+app.get(/^\/(?!ask).*/, (req, res) => {
   res.sendFile(path.resolve(__dirname, "../index.html"));
 });
 
