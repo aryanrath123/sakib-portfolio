@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sakib's Portfolio</title>
+  <title>Saquib's Portfolio</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
@@ -15,7 +15,7 @@
   <section class="heroSection" id="h">
     <header class="header">
       <div class="logo">
-        <h2>Sakib <span>Khan.</span></h2>
+        <h2 class="saquib">Saquib <span>Khan.</span></h2>
       </div>
 
       <div class="hamburger" id="hamburger" aria-label="Toggle navigation" title="Menu">
@@ -48,7 +48,7 @@
 
     <div class="mainHeading" data-aos="zoom-in">
       <p>Hello There!</p>
-      <h1>I'm <span>Sakib</span></h1>
+      <h1>I'm <span>Saquib</span></h1>
       <p class="subheading">
         <strong><span id="typing"></span></strong>
       </p>
@@ -79,15 +79,15 @@
 
 
       <div class="heroProfile">
-  <div class="blobWrapper">
-    <div class="shape"></div>
-    <img src="images/sakib_pic-removebg-preview.png" alt="Sakib" class="profile-img" />
-  </div>
-  <div class="heroButtons">
-    <a href="resume.pdf" download class="profileBtn">Download CV</a>
-    <a href="#contact" class="hireBtn">Hire Me</a>
-  </div>
-</div>
+        <div class="blobWrapper">
+          <div class="shape"></div>
+          <img src="images/sakib_pic-removebg-preview.png" alt="Sakib" class="profile-img" />
+        </div>
+        <div class="heroButtons">
+          <a href="resume.pdf" download class="profileBtn">Download CV</a>
+          <a href="#contact" class="hireBtn">Hire Me</a>
+        </div>
+      </div>
 
 
       <div class="socialIcons">
@@ -142,8 +142,6 @@
   </section>
 
   <!-- SCROLLING MARQUEE -->
-
-
 
 
   <section class="skills-ticker-section">
@@ -317,8 +315,6 @@
         </div>
 
 
-
-
         <div class="tech-card">
           <div class="tech-icon">
             <img
@@ -358,7 +354,7 @@
       </div>
       <div class="about-right" data-aos="fade-left">
         <h4 class="heading">About Me</h4>
-        <h2 class="heading2">Who is <span>Sakib</span></h2>
+        <h2 class="heading2">Who is <span>Saquib</span></h2>
         <p>Final year Computer Science student with 1 year of hands-on experience in AI and data science. Passionate
           about building intelligent systems and transforming data into insights. Currently enhancing my skills in
           machine learning, deep learning, and data visualization while completing my degree.</p>
@@ -385,12 +381,20 @@
     </div>
   </section>
 
-
+  <div class="chat-container">
+    <h2 class="bot">Saquib's AI Assistant 🤖</h2>
+    <div id="chat-box"></div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Ask me anything..."
+        onkeypress="if(event.key === 'Enter') sendMessage()" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
 
   <section class="educationSection">
-    <br>
+
     <div class="educationContainer">
-      <h4 class="heading" data-aos="zoom-in">Journey So Far</h4>
+
 
       <!-- EDUCATION PART -->
 
@@ -398,8 +402,6 @@
       <section class="education" id="education">
         <h2 class="heading">Education</h2>
         <div class="timeline-items">
-
-
 
 
           <div class="timeline-item">
@@ -690,11 +692,6 @@
   </div>
 
 
-
-
-
-
-
   <!-- FOOTER -->
   <button id="backToTop" aria-label="Back to top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -705,7 +702,7 @@
       <div class="footer-top">
         <div class="footer-col footer-about">
           <div class="foot">
-            <h2>SAKIB<span> KHAN.</span></h2>
+            <h2>SAQUIB<span> KHAN.</span></h2>
           </div>
           <p class="footer-description">Innovative AI researcher building intelligent systems in NLP, analytics, and ML
             to solve real-world challenges effectively.</p>
@@ -747,16 +744,10 @@
       </div>
 
       <div class="footer-bottom">
-        <p>Copyright &copy; 2025 <span>Sakib </span>. All Rights Reserved.</p>
+        <p>Copyright &copy; 2025 <span>Saquib </span>. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
-
-
-
-
-
-
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

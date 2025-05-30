@@ -81,3 +81,42 @@ document.querySelector(".viewMoreBtn").addEventListener("click", function () {
     btn.textContent = "View More";
   }
 });
+
+const chatBox = document.getElementById("chat-box");
+
+function appendMessage(content, isUser) {
+  const msg = document.createElement("div");
+  msg.className = isUser ? "user-msg" : "bot-msg";
+  msg.textContent = content;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+async function sendMessage() {
+  const input = document.getElementById("user-input");
+  const question = input.value.trim();
+  if (!question) return;
+
+  appendMessage(question, true);
+  input.value = "";
+
+  if (question.toLowerCase().includes("hi")) {
+    appendMessage(
+      "Hello! This is Saquib's AI assistant. How can I help you today?",
+      false
+    );
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question }),
+    });
+    const data = await response.json();
+    appendMessage(data.answer, false);
+  } catch (err) {
+    appendMessage("Sorry, something went wrong.", false);
+  }
+}

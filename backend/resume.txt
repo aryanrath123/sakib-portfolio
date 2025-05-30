@@ -1,0 +1,76 @@
+Saquib Khan | AI & Data Science Researcher
+Email: saquibkhan9572@gmail.com
+LinkedIn: saquib-khan5005
+Phone: +91 9771826884
+Location: Bhubaneswar, India
+
+PROFESSIONAL SUMMARY
+
+Research intern with results-oriented attitude in AI, NLP, and data analytics. Developed a Spoken Query
+Retrieval System for FIRE 2024, obtaining relevant documents in English with 85% accuracy and 10%
+reduction in query processing time. Predicted EPL match outcomes with 75% accuracy using 100,000+
+football match records and Power BI dashboards. Comparing 5 dementia prediction ML models, ensemble
+technique improved accuracy by 92% and reliability by 15%. Also created predictive models for industrial
+chemical analysis at Tata Steel (83.67% accuracy). Loves using cutting-edge research and computer
+learning to address challenging, real-world challenges.
+
+RESEARCH EXPERIENCE
+
+Research Assistant
+FIRE 2024 Conference - Spoken-Query Cross-Lingual Information Retrieval (SqCLIR) 
+[Aug 20, 2024 – Oct 14, 2024]
+- Developed a Spoken Query Retrieval System for monolingual queries in English, Gujarati, Hindi, and Bengali.
+- Processed over 5,000 spoken queries using FastWhisper and sentenceTransformers/OpenAI embeddings.
+- Achieved 85% document retrieval accuracy.
+- Reduced query processing time by 30%.
+
+Research Assistant
+Football Analytics Project - English Premier League (EPL) Analysis
+[Sep 1, 2024 – Nov 30, 2024]
+- Analyzed 100,000+ EPL match records from 2004–2024.
+- Built Power BI dashboards with 50+ visualizations (win rates, goal trends, player stats).
+- Achieved 75% match prediction accuracy using statistical models.
+
+Research Intern
+IEEE Access 25' - Dementia Prediction ML Model Comparison (In Progress)
+[Feb 1, 2025 – Feb 28, 2025]
+- Compared 5 ML models on a 1,000-record dataset.
+- Ensemble method reached 92% accuracy and 15% higher reliability.
+- Wrote manuscript for IEEE Access 25'.
+
+TECHNICAL SKILLS
+
+Languages: Python, Java, MySQL
+Tools & Libraries: PowerBI, MS Excel, ChatGPT, GitHub, VS Code, Google Colab, Jupyter Notebook,
+Matplotlib, Scikit-Learn, Pandas, Numpy, Plotly, PostgreSQL, Latex, Knime, LLMs
+
+EXTRA PROJECTS & INTERESTS
+
+- Building Generative AI apps using Ollama and LLMs.
+- Research Intern at a startup analyzing market trends.
+- Active in ML, DL, NLP, and CV webinars/workshops.
+
+EDUCATION
+
+Upper & Lower Secondary (2009–2022)
+Loyola School, Jamshedpur – ISC: 86%, ICSE: 93%
+
+B.Tech in AI & Data Science (2022–2026)
+C. V. Raman Global University, Bhubaneswar – CGPA: 8.54
+Relevant Courses: ML, Data Mining, DSA, DBMS, Java, Python, CN, CO, OOP
+
+WORK EXPERIENCE
+
+Tata Steel Pvt Ltd – Machine Learning Intern (Python)
+[May 2024 – Present]
+- Built Gradient Boosting Regressor for predicting Sulphur, Magnesium, and Lime levels.
+- Accuracy: 83.67% and 72.24% within ±0.002 threshold.
+
+360 digiTMG / INNODATATICS – ML Intern (Python)
+[May 2024 – June 2024]
+- Optimized Machine Downtime using ML (Accuracy: 79%).
+- Skills: EDA, Predictive Maintenance, CRISP-ML(Q), PostgreSQL.
+
+EY Global Delivery Services – Data Analytics Intern (PowerBI)
+[Dec 2023 – Jan 2024]
+- Built Flipkart sales & customer behavior dashboard for business insights.
