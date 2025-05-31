@@ -7,7 +7,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 10000;
 
-// CORS config
+// CORS
 app.use(
   cors({
     origin: ["https://sakib-portfolio.onrender.com", "http://localhost:10000"],
@@ -16,20 +16,21 @@ app.use(
   })
 );
 
-// Serve static files from ../public
-app.use(express.static(path.join(__dirname, "..", "public")));
-
 app.use(express.json());
 
-// Load resume
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, "..", "public")));
+
+// Load resume.txt
 let resume = "";
 try {
   resume = fs.readFileSync(path.join(__dirname, "resume.txt"), "utf-8");
+  console.log("✅ Resume loaded");
 } catch (err) {
-  console.error("❌ Could not load resume.txt:", err.message);
+  console.error("❌ resume.txt not found:", err.message);
 }
 
-// API route
+// Handle /ask
 app.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
@@ -59,20 +60,20 @@ app.post("/ask", async (req, res) => {
 
     const data = await response.json();
     const answer =
-      data.choices?.[0]?.message?.content?.trim() ||
-      "I couldn't generate an answer.";
+      data.choices?.[0]?.message?.content?.trim() || "No answer generated.";
     res.json({ answer });
   } catch (error) {
-    console.error("Server error:", error);
+    console.error("❌ /ask error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// Serve index.html as fallback
+// Serve index.html for all unmatched routes
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
+// Start server
 app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`);
 });
