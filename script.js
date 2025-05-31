@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize AOS
   AOS.init({ duration: 1000, once: true });
 
-  // Toggle Menu
+  // TOGGLE MENU
   const hamburger = document.getElementById("hamburger");
   const navbar = document.getElementById("navbar");
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Typing Effect
+  // TYPING EFFECT
   const typingElement = document.getElementById("typing");
   if (typingElement) {
     new Typed("#typing", {
@@ -24,12 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Chatbot Implementation
+  // CHATBOT IMPLEMENTATION
   const chatBox = document.getElementById("chat-box");
   const userInput = document.getElementById("user-input");
   const sendButton = document.querySelector(".input-area button");
 
-  // Make sendMessage globally available
   window.sendMessage = async function () {
     if (!chatBox || !userInput) return;
 
@@ -42,12 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
     userMsg.textContent = question;
     chatBox.appendChild(userMsg);
 
-    // Clear input and disable button
+    // Clear input and disable button during processing
     userInput.value = "";
     if (sendButton) sendButton.disabled = true;
-    chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Simple greetings response
+    // Simple greeting
     if (/hello|hi|hey/i.test(question)) {
       const botMsg = document.createElement("div");
       botMsg.className = "bot-msg";
@@ -61,18 +59,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // AI Response
     try {
-      const response = await fetch("https://your-render-url.onrender.com/ask", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ question }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      const response = await fetch(
+        "https://saquib-ai-assistant.onrender.com/ask",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question }),
+        }
+      );
 
       const data = await response.json();
       const botMsg = document.createElement("div");
@@ -93,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Event listeners
   if (userInput) {
     userInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") window.sendMessage();
@@ -103,6 +96,4 @@ document.addEventListener("DOMContentLoaded", function () {
   if (sendButton) {
     sendButton.addEventListener("click", window.sendMessage);
   }
-
-  // [Keep all your other existing code...]
 });
