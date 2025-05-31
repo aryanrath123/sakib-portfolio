@@ -5,21 +5,23 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
-// ✅ Allow frontend domain
+// CORS config
 app.use(
   cors({
-    origin: ["https://sakib-portfolio.onrender.com"], // your actual frontend
+    origin: ["https://sakib-portfolio.onrender.com", "http://localhost:10000"],
     methods: ["GET", "POST"],
     credentials: true,
   })
 );
 
-app.use(express.json());
-app.use(express.static(path.join(__dirname, ".."))); // serves index.html if needed
+// Serve static files from ../public
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-// Load resume content
+app.use(express.json());
+
+// Load resume
 let resume = "";
 try {
   resume = fs.readFileSync(path.join(__dirname, "resume.txt"), "utf-8");
@@ -27,7 +29,7 @@ try {
   console.error("❌ Could not load resume.txt:", err.message);
 }
 
-// AI Assistant Endpoint
+// API route
 app.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
@@ -56,12 +58,6 @@ app.post("/ask", async (req, res) => {
     );
 
     const data = await response.json();
-
-    if (!response.ok) {
-      console.error("OpenRouter API Error:", data);
-      return res.status(500).json({ error: "AI service error" });
-    }
-
     const answer =
       data.choices?.[0]?.message?.content?.trim() ||
       "I couldn't generate an answer.";
@@ -72,9 +68,9 @@ app.post("/ask", async (req, res) => {
   }
 });
 
-// Serve frontend fallback
+// Serve index.html as fallback
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
 app.listen(port, () => {
