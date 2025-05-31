@@ -1,5 +1,3 @@
-// server.js
-
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
@@ -9,23 +7,26 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Check for required environment variables
 if (!process.env.OPENROUTER_API_KEY) {
   console.error("❌ Missing OPENROUTER_API_KEY in environment variables");
-  process.exit(1); // Stop the server if API key is not set
+  process.exit(1);
 }
 
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname))); // Serve static files from root
 
+// Load resume data
 let resume = "";
-
 try {
   resume = fs.readFileSync(path.join(__dirname, "resume.txt"), "utf-8");
 } catch (err) {
   console.error("❌ Could not load resume.txt:", err.message);
 }
 
+// API endpoint for AI questions
 app.post("/ask", async (req, res) => {
   const question = req.body.question;
 
@@ -63,7 +64,6 @@ app.post("/ask", async (req, res) => {
     }
 
     const answer = data.choices?.[0]?.message?.content?.trim();
-
     if (!answer) {
       throw new Error("No response from model.");
     }
@@ -75,11 +75,16 @@ app.post("/ask", async (req, res) => {
       data: error.response?.data,
       status: error.response?.status,
     });
-
     res.status(500).json({ error: "Something went wrong." });
   }
 });
 
+// Serve frontend for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// Start server
 app.listen(port, () => {
   console.log(`🚀 Server is running on http://localhost:${port}`);
 });
