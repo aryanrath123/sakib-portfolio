@@ -80,7 +80,7 @@ app.post("/ask", async (req, res) => {
 });
 
 // Serve frontend for all other routes
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
