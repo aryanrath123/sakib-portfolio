@@ -1,4 +1,3 @@
-// Wait for DOM to load before executing JavaScript
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize AOS
   AOS.init({ duration: 1000, once: true });
@@ -25,81 +24,77 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ... [keep all your other existing code until the chat section]
+  // [Keep all your other existing animations and counters...]
 
-  // CHATBOT FUNCTIONALITY - WITH NULL CHECKS
+  // CHATBOT IMPLEMENTATION
   const chatBox = document.getElementById("chat-box");
-  const sendButton = document.getElementById("send-button");
   const userInput = document.getElementById("user-input");
+  const sendButton = document.querySelector(".input-area button");
 
-  // Only initialize chat if elements exist
-  if (chatBox && sendButton && userInput) {
-    function appendMessage(content, isUser) {
-      const msg = document.createElement("div");
-      msg.className = isUser ? "user-msg" : "bot-msg";
-      msg.textContent = content;
-      chatBox.appendChild(msg);
+  // Make sendMessage globally available for HTML event handlers
+  window.sendMessage = async function () {
+    if (!chatBox || !userInput) return;
+
+    const question = userInput.value.trim();
+    if (!question) return;
+
+    // Add user message
+    const userMsg = document.createElement("div");
+    userMsg.className = "user-msg";
+    userMsg.textContent = question;
+    chatBox.appendChild(userMsg);
+
+    // Clear input and disable button during processing
+    userInput.value = "";
+    if (sendButton) sendButton.disabled = true;
+
+    // Simple greetings response
+    if (/hello|hi|hey/i.test(question)) {
+      const botMsg = document.createElement("div");
+      botMsg.className = "bot-msg";
+      botMsg.textContent =
+        "Hello! This is Saquib's AI assistant. How can I help you today?";
+      chatBox.appendChild(botMsg);
+      if (sendButton) sendButton.disabled = false;
+      chatBox.scrollTop = chatBox.scrollHeight;
+      return;
+    }
+
+    // AI Response
+    try {
+      const response = await fetch("https://your-render-url.onrender.com/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+      });
+
+      const data = await response.json();
+      const botMsg = document.createElement("div");
+      botMsg.className = "bot-msg";
+      botMsg.textContent =
+        data.answer || "I didn't understand that. Please try again.";
+      chatBox.appendChild(botMsg);
+    } catch (err) {
+      console.error("Chat error:", err);
+      const errorMsg = document.createElement("div");
+      errorMsg.className = "bot-msg error";
+      errorMsg.textContent =
+        "Sorry, I'm having trouble responding. Please try again later.";
+      chatBox.appendChild(errorMsg);
+    } finally {
+      if (sendButton) sendButton.disabled = false;
       chatBox.scrollTop = chatBox.scrollHeight;
     }
+  };
 
-    // Handle Enter key press
+  // Alternative event listeners (better than inline handlers)
+  if (userInput) {
     userInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        sendMessage();
-      }
+      if (e.key === "Enter") window.sendMessage();
     });
+  }
 
-    // Handle send button click
-    sendButton.addEventListener("click", sendMessage);
-
-    async function sendMessage() {
-      const question = userInput.value.trim();
-      if (!question) return;
-
-      appendMessage(question, true);
-      userInput.value = "";
-      sendButton.disabled = true;
-
-      // Simple greetings response
-      if (/hello|hi|hey/i.test(question)) {
-        appendMessage(
-          "Hello! This is Saquib's AI assistant. How can I help you today?",
-          false
-        );
-        sendButton.disabled = false;
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          "https://your-render-url.onrender.com/ask",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        appendMessage(
-          data.answer || "I didn't get a response. Please try again.",
-          false
-        );
-      } catch (err) {
-        console.error("Chatbot error:", err);
-        appendMessage(
-          "Sorry, the chatbot service is currently unavailable. Please try again later.",
-          false
-        );
-      } finally {
-        sendButton.disabled = false;
-      }
-    }
-  } else {
-    console.warn("Chat elements not found - disabling chat functionality");
+  if (sendButton) {
+    sendButton.addEventListener("click", window.sendMessage);
   }
 });
