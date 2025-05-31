@@ -10,19 +10,19 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "../")));
 
 // API Routes
 app.post("/ask", async (req, res) => {
-  // ... keep your existing /ask route implementation ...
+  // ... your existing /ask route ...
 });
 
 // Serve frontend
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "../index.html"));
 });
 
-// Error handling middleware
+// Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
