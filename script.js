@@ -1,7 +1,6 @@
 AOS.init({ duration: 1000, once: true });
 
-//TOGGLE
-
+// TOGGLE MENU
 const hamburger = document.getElementById("hamburger");
 const navbar = document.getElementById("navbar");
 
@@ -9,8 +8,7 @@ hamburger.addEventListener("click", () => {
   navbar.classList.toggle("active");
 });
 
-//TYPING EFFECT
-
+// TYPING EFFECT
 new Typed("#typing", {
   strings: ["AI & Data Science.", "Generative AI.", "Machine Learning."],
   typeSpeed: 60,
@@ -19,7 +17,7 @@ new Typed("#typing", {
   loop: true,
 });
 
-//COUNTER ANIMATION
+// COUNTER ANIMATION
 const counters = document.querySelectorAll(".counter");
 const speed = 50;
 
@@ -52,6 +50,7 @@ if (counterSection) {
   observer.observe(counterSection);
 }
 
+// SCROLL TO TOP
 window.onscroll = () => {
   const scrollY = window.scrollY,
     topBtn = document.getElementById("backToTop");
@@ -65,7 +64,8 @@ document
     window.scrollTo({ top: 0, behavior: "smooth" })
   );
 
-document.querySelector(".viewMoreBtn").addEventListener("click", function () {
+// VIEW MORE/LESS TOGGLE
+document.querySelector(".viewMoreBtn")?.addEventListener("click", function () {
   const expandedSection = document.querySelector(".tech-grid-expanded");
   const btn = this;
 
@@ -82,7 +82,9 @@ document.querySelector(".viewMoreBtn").addEventListener("click", function () {
   }
 });
 
+// CHATBOT FUNCTIONALITY
 const chatBox = document.getElementById("chat-box");
+const sendButton = document.getElementById("send-button");
 
 function appendMessage(content, isUser) {
   const msg = document.createElement("div");
@@ -92,6 +94,16 @@ function appendMessage(content, isUser) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+// Handle Enter key press
+document.getElementById("user-input").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
+
+// Handle send button click
+sendButton.addEventListener("click", sendMessage);
+
 async function sendMessage() {
   const input = document.getElementById("user-input");
   const question = input.value.trim();
@@ -99,24 +111,41 @@ async function sendMessage() {
 
   appendMessage(question, true);
   input.value = "";
+  sendButton.disabled = true;
 
-  if (question.toLowerCase().includes("hi")) {
+  // Simple greetings response
+  if (/hello|hi|hey/i.test(question)) {
     appendMessage(
       "Hello! This is Saquib's AI assistant. How can I help you today?",
       false
     );
+    sendButton.disabled = false;
     return;
   }
 
   try {
-    const response = await fetch("/ask", {
+    const response = await fetch("https://your-render-url.onrender.com/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ question }),
     });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const data = await response.json();
-    appendMessage(data.answer, false);
+    appendMessage(
+      data.answer || "I didn't get a response. Please try again.",
+      false
+    );
   } catch (err) {
-    appendMessage("Sorry, something went wrong.", false);
+    console.error("Chatbot error:", err);
+    appendMessage(
+      "Sorry, the chatbot service is currently unavailable. Please try again later.",
+      false
+    );
+  } finally {
+    sendButton.disabled = false;
   }
 }
