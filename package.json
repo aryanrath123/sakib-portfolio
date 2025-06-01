@@ -4,10 +4,12 @@
   "description": "Portfolio website with backend server",
   "main": "backend/server.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node backend/server.js",
+  "dev": "nodemon backend/server.js",
+  "build": "echo 'No build step needed'",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+
   "keywords": [
     "portfolio",
     "express",
