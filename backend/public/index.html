@@ -381,15 +381,25 @@
     </div>
   </section>
 
-  <div class="chat-container">
-    <h2 class="bot">Saquib's AI Assistant 🤖</h2>
-    <div id="chat-box"></div>
+
+  <div class="chat-container" aria-live="polite">
+    <h1 class="bot" aria-label="Saquib's AI Assistant 🤖">
+      Saquib's AI Assistant <span aria-hidden="true">🤖</span>
+    </h1>
+
+    <div id="chat-box" role="log" aria-live="polite" tabindex="0"></div>
+
     <div class="input-area">
-      <input type="text" id="user-input" placeholder="Ask me anything..."
-        onkeypress="if(event.key === 'Enter') sendMessage()" />
-      <button onclick="sendMessage()">Send</button>
+      <input type="text" id="user-input" placeholder="Ask me anything..." aria-label="Type your message" />
+      <button id="send-button" aria-label="Send message">Send</button>
     </div>
+
+    <audio id="typing-sound" src="keyboard-typing-one-short-292592.mp3" preload="auto"></audio>
   </div>
+
+
+
+
 
   <section class="educationSection">
 
@@ -751,7 +761,16 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+  
+
+
+
+
   <script src="script.js"></script>
 </body>
 
