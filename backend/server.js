@@ -5,6 +5,10 @@ const fs = require("fs");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 require("dotenv").config({ path: path.join(__dirname, ".env") });
+console.log(
+  "🧪 OPENROUTER_API_KEY loaded:",
+  process.env.OPENROUTER_API_KEY ? "✅ yes" : "❌ missing"
+);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -89,6 +93,7 @@ app.post("/ask", async (req, res) => {
 [RESUME START]
 ${resumeText}
 [RESUME END]`;
+
 
   try {
     const startTime = Date.now();
