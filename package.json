@@ -4,12 +4,11 @@
   "description": "Portfolio website with backend server",
   "main": "backend/server.js",
   "scripts": {
-  "start": "node backend/server.js",
-  "dev": "nodemon backend/server.js",
-  "build": "echo 'No build step needed'",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
-
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "build": "echo 'No build step needed'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [
     "portfolio",
     "express",
@@ -22,8 +21,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "node-fetch": "^3.3.2"
-    
+    "node-fetch": "^3.3.2",
+    "saquib-portfolio": "file:"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
